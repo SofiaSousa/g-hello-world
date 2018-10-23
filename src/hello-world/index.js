@@ -47,11 +47,11 @@ const FONT_SIZES = [
 export const name = 'hello-world';
 
 export const settings = {
-  title: __('My Custom Block'),
+  title: __('Hello world'),
 
-  description: __('A custom block for Gutenberg Cloud'),
+  description: __('My first custom block for Could Blocks'),
 
-  icon: 'cover-image',
+  icon: 'format-chat',
 
   attributes: BLOCK_ATTRIBUTES,
 
