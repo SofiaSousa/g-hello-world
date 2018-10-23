@@ -15,7 +15,13 @@ const { __ } = i18n;
 
 // TODO: Chooose components for the sidebar settings
 const { PanelBody, FontSizePicker } = components;
-const { InspectorControls, PanelColorSettings, RichText } = editor;
+const {
+  AlignmentToolbar,
+  BlockControls,
+  InspectorControls,
+  PanelColorSettings,
+  RichText,
+} = editor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
@@ -33,6 +39,10 @@ const BLOCK_ATTRIBUTES = {
   },
   backgroundColor: {
     type: 'string',
+  },
+  align: {
+    type: 'string',
+    default: 'center',
   },
 };
 
@@ -56,13 +66,14 @@ export const settings = {
   attributes: BLOCK_ATTRIBUTES,
 
   edit ({ attributes, className, setAttributes }) {
-    const { title, fontSize, fontColor, backgroundColor } = attributes;
+    const { title, fontSize, fontColor, backgroundColor, align } = attributes;
     const containerStyle = {
       backgroundColor,
     };
     const titleStyle = {
       fontSize: fontSize && `${fontSize}px`,
       color: fontColor,
+      textAlign: align,
     };
 
     return (
@@ -76,6 +87,13 @@ export const settings = {
             inlineToolbar
           />
         </div>
+
+        <BlockControls>
+          <AlignmentToolbar
+            value={ align }
+            onChange={ nextAlign => setAttributes({ align: nextAlign }) }
+          />
+        </BlockControls>
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
@@ -105,13 +123,14 @@ export const settings = {
   },
 
   save ({ attributes, className }) {
-    const { title, fontSize, fontColor, backgroundColor } = attributes;
+    const { title, fontSize, fontColor, backgroundColor, align } = attributes;
     const containerStyle = {
       backgroundColor,
     };
     const titleStyle = {
       fontSize: fontSize && `${fontSize}px`,
       color: fontColor,
+      textAlign: align,
     };
 
     return (
